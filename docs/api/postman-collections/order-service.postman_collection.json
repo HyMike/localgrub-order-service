@@ -1,0 +1,71 @@
+{
+  "info": {
+    "name": "LocalGrub - Order Service API",
+    "description": "API collection for the Order Service microservice",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{firebase_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"item_123\",\n  \"name\": \"Classic Burger\",\n  \"quantity\": 2,\n  \"price\": 12.99,\n  \"creditCardInfo\": \"encrypted_card_data\"\n}"
+        },
+        "url": {
+          "raw": "{{order_service_url}}/success",
+          "host": ["{{order_service_url}}"],
+          "path": ["success"]
+        },
+        "description": "Creates a new order and triggers the order flow"
+      },
+      "response": []
+    },
+    {
+      "name": "Mark Order Ready",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orderId\": \"order_456\",\n  \"userId\": \"user_789\"\n}"
+        },
+        "url": {
+          "raw": "{{order_service_url}}/order-ready",
+          "host": ["{{order_service_url}}"],
+          "path": ["order-ready"]
+        },
+        "description": "Marks an order as ready for pickup"
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "order_service_url",
+      "value": "http://localhost:3005",
+      "type": "string"
+    },
+    {
+      "key": "firebase_token",
+      "value": "your_firebase_id_token_here",
+      "type": "string"
+    }
+  ]
+}
